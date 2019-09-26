@@ -51,7 +51,7 @@ public class AES {
         }
         return null;
     }
-
+    public static String encryptedString = "xZwM7BWIpSjYyGFr9rhpEa+cYVtACW7yQKmyN6OYSCv0ZEg9jWbc6lKzzCxRSSIvOvlimQZBMZOYnOwiA9yy3YU8zk4abFSItoW6Wj0ufQ0=";
     public static String letras[] = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
     public static ArrayList<Combinacion> combinaciones;
 
@@ -59,29 +59,43 @@ public class AES {
         combinaciones = new ArrayList<>();
         for (int a = 0; a < 10; a++) {
             for (int b = 0; b < 26; b++) {
-                Combinacion nueva= new Combinacion(a,letras[b]);
+                Combinacion nueva = new Combinacion(a, letras[b]);
                 combinaciones.add(nueva);
-                
+
             }
         }
     }
-    public static void Probar(){
+    public static boolean encontrado = false;
+    public static int iteraciones = 0;
+
+    public static void Probar(int maximo, int minimo) {
+        encontrado = false;
         float porcent = (float) (0.5);
-        int tamano= (int) (combinaciones.size()*porcent);
-        System.out.println(porcent);
-        for(int a=0;a<tamano;a++){
-            int numero= combinaciones.get(a).numero;
+        int maximum = (int) (maximo * porcent);
+        for (int a = minimo; a < maximum; a++) {
+            iteraciones++;
+            int numero = combinaciones.get(a).numero;
             String letra = combinaciones.get(a).letra;
-            String key="29dh120"+letra+"dk1"+numero+"3";
-            System.out.println(key);
+            String key = "29dh120" + letra + "dk1" + numero + "3";
+
+        }
+        if (encontrado == true) {
+            Probar(maximum, minimo);
+        } else if (maximo - minimo == 4) {
+            for (int i = minimo; i < maximo; i++) {
+                int numero = combinaciones.get(i).numero;
+                String letra = combinaciones.get(i).letra;
+                
+            }
+        } else {
+            Probar(maximo, maximum);
         }
     }
 
     public static void main(String[] args) {
         CrearCombinaciones();
-        Probar();
-       // final String secretKey = "29dh120_dk1_3";
-        //String encryptedString = "xZwM7BWIpSjYyGFr9rhpEa+cYVtACW7yQKmyN6OYSCv0ZEg9jWbc6lKzzCxRSSIvOvlimQZBMZOYnOwiA9yy3YU8zk4abFSItoW6Wj0ufQ0=";
+        Probar(260, 0);
+        //final String secretKey = "29dh120_dk1_3";
         //String decryptedString = decrypt(encryptedString, secretKey);
         //System.out.println(encryptedString);
         //System.out.println(decryptedString);
