@@ -7,9 +7,9 @@ package caso7;
  */
 public class Combinacion {
     int numero;
-    char letra;
+    String letra;
 
-    public Combinacion(int numero, char letra) {
+    public Combinacion(int numero, String letra) {
         this.numero = numero;
         this.letra = letra;
     }

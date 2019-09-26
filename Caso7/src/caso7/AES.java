@@ -52,24 +52,38 @@ public class AES {
         return null;
     }
 
-    //public int numeros[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-    public char letras[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
-    public ArrayList<Combinacion> combinaciones;
+    public static String letras[] = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+    public static ArrayList<Combinacion> combinaciones;
 
-    public void CrearCombinaciones() {
+    public static void CrearCombinaciones() {
         combinaciones = new ArrayList<>();
-        for (int a = 0; a > 10; a++) {
-            for (int b = 0; b > 26; b++) {
+        for (int a = 0; a < 10; a++) {
+            for (int b = 0; b < 26; b++) {
                 Combinacion nueva= new Combinacion(a,letras[b]);
+                combinaciones.add(nueva);
+                
             }
+        }
+    }
+    public static void Probar(){
+        float porcent = (float) (0.5);
+        int tamano= (int) (combinaciones.size()*porcent);
+        System.out.println(porcent);
+        for(int a=0;a<tamano;a++){
+            int numero= combinaciones.get(a).numero;
+            String letra = combinaciones.get(a).letra;
+            String key="29dh120"+letra+"dk1"+numero+"3";
+            System.out.println(key);
         }
     }
 
     public static void main(String[] args) {
-        final String secretKey = "29dh120_dk1_3";
-        String encryptedString = "xZwM7BWIpSjYyGFr9rhpEa+cYVtACW7yQKmyN6OYSCv0ZEg9jWbc6lKzzCxRSSIvOvlimQZBMZOYnOwiA9yy3YU8zk4abFSItoW6Wj0ufQ0=";
-        String decryptedString = decrypt(encryptedString, secretKey);
-        System.out.println(encryptedString);
-        System.out.println(decryptedString);
+        CrearCombinaciones();
+        Probar();
+       // final String secretKey = "29dh120_dk1_3";
+        //String encryptedString = "xZwM7BWIpSjYyGFr9rhpEa+cYVtACW7yQKmyN6OYSCv0ZEg9jWbc6lKzzCxRSSIvOvlimQZBMZOYnOwiA9yy3YU8zk4abFSItoW6Wj0ufQ0=";
+        //String decryptedString = decrypt(encryptedString, secretKey);
+        //System.out.println(encryptedString);
+        //System.out.println(decryptedString);
     }
 }
