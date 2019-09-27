@@ -47,7 +47,7 @@ public class AES {
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
             return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
         } catch (Exception e) {
-            System.out.println("Error while decrypting: " + e.toString());
+            //System.out.println("Error while decrypting: " + e.toString());
         }
         return null;
     }
@@ -65,36 +65,54 @@ public class AES {
             }
         }
     }
-    public static boolean encontrado = false;
+    public static boolean esnull;
     public static int iteraciones = 0;
-
+    
+    /*public static void ProbarAUX(int maximo, int minimo){
+        
+    }*/
     public static void Probar(int maximo, int minimo) {
-        encontrado = false;
+        esnull = true;
         float porcent = (float) (0.5);
         int maximum = (int) (maximo * porcent);
         for (int a = minimo; a < maximum; a++) {
             iteraciones++;
             int numero = combinaciones.get(a).numero;
             String letra = combinaciones.get(a).letra;
-            String key = "29dh120" + letra + "dk1" + numero + "3";
-
+            String llave = "29dh120" + letra + "dk1" + numero + "3";
+            String decryptedString = decrypt(encryptedString, llave);
+            esnull = decryptedString==null;
+            System.out.println(maximum +"y"+ iteraciones);
         }
-        if (encontrado == true) {
-            Probar(maximum, minimo);
-        } else if (maximo - minimo == 4) {
-            for (int i = minimo; i < maximo; i++) {
-                int numero = combinaciones.get(i).numero;
-                String letra = combinaciones.get(i).letra;
-                
+        //System.out.println(maximum);
+            if (esnull == false) {
+            if (maximo - minimo == 4) {
+                for (int i = minimo; i < maximo; i++) {
+                    int numero = combinaciones.get(i).numero;
+                    String letra = combinaciones.get(i).letra;
+                    System.out.println(letra + numero);
+
+                }
+            } else {
+                Probar(maximum, minimo);
             }
         } else {
-            Probar(maximo, maximum);
+            if (4 >= maximo - minimo) {
+
+                System.out.println("No hay posibles respuestas\n");
+
+            } else {
+                Probar(260+maximum, maximum);
+            }
+
         }
+
     }
 
     public static void main(String[] args) {
         CrearCombinaciones();
         Probar(260, 0);
+
         //final String secretKey = "29dh120_dk1_3";
         //String decryptedString = decrypt(encryptedString, secretKey);
         //System.out.println(encryptedString);
