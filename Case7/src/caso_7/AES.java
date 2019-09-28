@@ -1,3 +1,7 @@
+//Programa creado por Ronald Esquivel Lopez y Fabian Vives
+//Instituto Tecnologico de Costa Rica
+
+
 package caso_7;
 
 import java.io.UnsupportedEncodingException;
